@@ -1,0 +1,46 @@
+body {
+    background-color: #333;
+    color: #fff;
+}
+
+.esset {
+    margin: 0 30%;
+    box-sizing: border-box;
+    background-color: #000;
+    padding: 30px 30px 100px 30px;
+}
+
+.big {
+    font-size: larger;
+    clear: both;
+}
+
+.little {
+    margin: 20px;
+}
+
+#year {
+    float: left;
+}
+
+#runtime {
+    float: right;
+}
+
+#title {
+    font-weight: bold;
+    font-size: x-large;
+    margin-bottom: 10px;
+}
+
+#plot {
+    padding: 10px;
+    text-align: justify;
+}
+
+.back {
+    background-color: #fff;
+    color: #000;
+    font-size: large;
+    float: right;
+}
