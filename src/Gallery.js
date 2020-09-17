@@ -8,7 +8,6 @@ const opts = {
   width: "640",
   playerVars: {
     // https://developers.google.com/youtube/player_parameters
-    autoplay: 1,
     paused: true,
   },
 };
@@ -19,7 +18,6 @@ class Gallery extends React.Component {
       videoId="LVyOWbrxjHM"
       opts={opts}
       onReady={(event) => {
-        console.log(event.target);
         event.target.pauseVideo();
       }}
     ></YouTube>,
@@ -33,15 +31,14 @@ class Gallery extends React.Component {
     <YouTube
       videoId="RaeLAwacDG4"
       opts={opts}
-      onStateChange={(event) => {
-        opts.paused ? event.target.pauseVideo() : event.target.playVideo();
+      onReady={(event) => {
+        event.target.pauseVideo();
       }}
     ></YouTube>,
   ];
 
   state = {
     currentIndex: 0,
-    responsive: { 1024: { items: 3 } },
     galleryItems: this.galleryItems(),
   };
 
@@ -60,10 +57,10 @@ class Gallery extends React.Component {
   };
 
   slideNext = () =>
-    this.setState({ currentIndex: (this.state.currentIndex + 1) % 3 });
+    this.setState({ currentIndex: this.state.currentIndex + 1 });
 
   slidePrev = () =>
-    this.setState({ currentIndex: (this.state.currentIndex - 1) % 3 });
+    this.setState({ currentIndex: this.state.currentIndex - 1 });
 
   thumbItem = (item, i) => <span onClick={() => this.slideTo(i)}>* </span>;
 
