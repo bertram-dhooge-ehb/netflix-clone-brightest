@@ -20,7 +20,6 @@ function Row({ title, fetchUrl }) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [selected, setSelected] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -42,8 +41,6 @@ function Row({ title, fetchUrl }) {
         }
       })
       .catch((error) => console.log(error));
-      setSelected(!selected);
-      setSelectedMovie(movie);
   };
 
   return (
