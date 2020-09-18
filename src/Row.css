@@ -5,6 +5,10 @@
   padding: 40px;
 }
 
+.row_posters::-webkit-scrollbar {
+  display: none;
+}
+
 .row_poster {
   object-fit: contain;
   width: 100%;

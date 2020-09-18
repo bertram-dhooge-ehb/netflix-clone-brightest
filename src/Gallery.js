@@ -1,124 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "./axios";
+import requests from "./requests";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import YouTube from "react-youtube";
+import GalleryItem from "./GalleryItem";
 
-const opts = {
-  height: "390",
-  width: "640",
-  playerVars: {
-    // https://developers.google.com/youtube/player_parameters
-    paused: true,
-  },
-};
+function Gallery() {
+  const [movies, setMovies] = useState([]);
 
-class Gallery extends React.Component {
-  items = [
-    <YouTube
-      videoId="LVyOWbrxjHM"
-      opts={opts}
-      onReady={(event) => {
-        event.target.pauseVideo();
-      }}
-    ></YouTube>,
-    <YouTube
-      videoId="qWGiPq14T4Y"
-      opts={opts}
-      onReady={(event) => {
-        event.target.pauseVideo();
-      }}
-    ></YouTube>,
-    <YouTube
-      videoId="RaeLAwacDG4"
-      opts={opts}
-      onReady={(event) => {
-        event.target.pauseVideo();
-      }}
-    ></YouTube>,
-  ];
+  useEffect(() => {
+    async function fetchData() {
+      const request = await axios.get(requests.fetchComedyMovies);
+      let tempMovies = request.data.results;
 
-  state = {
-    currentIndex: 0,
-    galleryItems: this.galleryItems(),
-  };
-
-  slideTo = (i) => this.setState({ currentIndex: i });
-
-  onSlideChanged = (e) => {
-    this.setState({ currentIndex: e.item });
-    for (let index = 0; index < this.items.length; index++) {
-      const vid = this.items[index];
-      if (index === e.item) {
-        vid.props.opts.paused = false;
-      } else {
-        vid.props.opts.paused = true;
+      for (let i = tempMovies.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [tempMovies[i], tempMovies[j]] = [tempMovies[j], tempMovies[i]];
       }
+
+      setMovies(tempMovies.slice(0, 5));
     }
-  };
+    fetchData();
+  }, []);
 
-  slideNext = () =>
-    this.setState({ currentIndex: this.state.currentIndex + 1 });
-
-  slidePrev = () =>
-    this.setState({ currentIndex: this.state.currentIndex - 1 });
-
-  thumbItem = (item, i) => <span onClick={() => this.slideTo(i)}>* </span>;
-
-  galleryItems() {
-    return this.items.map((i) => <h2 key={i}> {i}</h2>);
-  }
-
-  render() {
-    const { galleryItems, responsive, currentIndex } = this.state;
-    return (
-      <div>
-        <AliceCarousel
-          dotsDisabled={true}
-          buttonsDisabled={true}
-          items={galleryItems}
-          responsive={responsive}
-          slideToIndex={currentIndex}
-          onSlideChanged={this.onSlideChanged}
-        />
-
-        <ul>{this.items.map(this.thumbItem)}</ul>
-        <button onClick={() => this.slidePrev()}>Prev button</button>
-        <button onClick={() => this.slideNext()}>Next button</button>
-      </div>
-    );
-  }
-
-  /* return (
+  return (
     <div>
-      <AliceCarousel
-        onSlideChanged={(e) => {
-          console.log(e);
-        }}
-      >
-        <YouTube
-          videoId="LVyOWbrxjHM"
-          opts={opts}
-          onReady={(event) => {
-            event.target.pauseVideo();
-          }}
-        ></YouTube>
-        <YouTube
-          videoId="qWGiPq14T4Y"
-          opts={opts}
-          onReady={(event) => {
-            event.target.pauseVideo();
-          }}
-        ></YouTube>
-        <YouTube
-          videoId="RaeLAwacDG4"
-          opts={opts}
-          onReady={(event) => {
-            event.target.pauseVideo();
-          }}
-        ></YouTube>
+      <AliceCarousel buttonsDisabled={true}>
+        {movies.map((movie) => (
+          <GalleryItem key={movie.id} movieId={movie.id}></GalleryItem>
+        ))}
       </AliceCarousel>
     </div>
-  ); */
+  );
 }
 
 export default Gallery;
