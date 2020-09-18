@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "./axios";
+import Detail from "./Detail";
 import "./Row.css";
-import movieTrailer from "movie-trailer";
-import YouTube from "react-youtube";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function GalleryItem({ movieId }) {
   const [movie, setMovie] = useState([]);
-  const [trailerUrl, setTrailerUrl] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClick = () => setShow(!show);
 
   useEffect(() => {
     async function fetchData() {
@@ -25,6 +26,7 @@ function GalleryItem({ movieId }) {
 
   return (
     <div
+      onClick={handleClick}
       className="item"
       style={{
         objectFit: "contain",
@@ -42,6 +44,7 @@ function GalleryItem({ movieId }) {
       <h1 style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
         {movie?.title || movie?.name || movie?.original_name}
       </h1>
+      {show && <Detail trailerUrl={null} movie={movie}></Detail>}
       {/*<img
         key={movieId}
         className="row_poster"

@@ -1,46 +1,31 @@
-body {
-    background-color: #333;
-    color: #fff;
-}
-
-.esset {
-    margin: 0 30%;
-    box-sizing: border-box;
-    background-color: #000;
-    padding: 30px 30px 100px 30px;
-}
-
 .big {
-    font-size: larger;
-    clear: both;
+  font-size: larger;
+  clear: both;
 }
 
 .little {
-    margin: 20px;
+  margin: 0px;
 }
 
 #year {
-    float: left;
+  float: left;
 }
 
 #runtime {
-    float: right;
+  float: right;
 }
 
 #title {
-    font-weight: bold;
-    font-size: x-large;
-    margin-bottom: 10px;
+  font-weight: bold;
+  font-size: x-large;
+  margin-bottom: 10px;
+}
+
+#plot::-webkit-scrollbar {
+  display: none;
 }
 
 #plot {
-    padding: 10px;
-    text-align: justify;
-}
-
-.back {
-    background-color: #fff;
-    color: #000;
-    font-size: large;
-    float: right;
+  padding: 10px;
+  text-align: justify;
 }

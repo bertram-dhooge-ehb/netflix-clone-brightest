@@ -1,36 +1,37 @@
-import React from "react";
-import YouTube from "react-youtube";
+import React, { useState, useEffect } from "react";
 import "./Detail.css";
+import YouTube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
 const opts = {
   height: "390",
   width: "640",
   playerVars: {
     // https://developers.google.com/youtube/player_parameters
-    paused: true,
+    autoplay: 1,
   },
 };
 
-function Detail({ movieId }) {
+function Detail({ trailerUrl, movie }) {
+  let title = movie?.name ? movie.name : movie.title;
+  let date = movie?.first_air_date ? movie.first_air_date : movie.release_date;
   return (
     // div waar alles inzit
-    <div className="esset">
-      {/* De trailer */}
-      <YouTube
-        videoId="VyHV0BRtdxo"
-        opts={opts}
-        onReady={(event) => {
-          event.target.pauseVideo();
-        }}
-      ></YouTube>
+    <div
+      className="esset"
+      style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+    >
+      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
       {/* de details zelf*/}
       <div className="details">
-        <div id="year" className="little"> {this.props.movie.release_date.slice(0,4)} </div>
-        <div id="runtime" className="little"> {/*runtime*/}  </div>
-        <div id="title" className="big"> {this.props.movie.title} Harry Potter and the pilospher's stone</div>
-        <div id="plot" className="big">{this.props.movie.overview}</div>
+        <div id="title" className="big">
+          {" "}
+          {title}{" "}
+        </div>
+        <div id="plot" className="big" style={{ overflowY: "scroll" }}>
+          {movie.overview}
+        </div>
       </div>
-      <button className="back">Go back</button>
     </div>
   );
 }

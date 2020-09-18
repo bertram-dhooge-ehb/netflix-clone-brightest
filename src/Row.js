@@ -2,24 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "./axios";
 import "./Row.css";
 import movieTrailer from "movie-trailer";
-import YouTube from "react-youtube";
 import Detail from "./Detail";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-const opts = {
-  height: "390",
-  width: "640",
-  playerVars: {
-    // https://developers.google.com/youtube/player_parameters
-    autoplay: 1,
-  },
-};
-
 function Row({ title, fetchUrl }) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
-  const [selectedMovie, setSelectedMovie] = useState({});
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -63,8 +54,12 @@ function Row({ title, fetchUrl }) {
           />
         ))}
       </div>
-      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
-      {/* {{selectedMovie && <Detail movie={selectedMovie}/>}} */}
+      <div className="details">
+        {/*trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />*/}
+        {selectedMovie && (
+          <Detail trailerUrl={trailerUrl} movie={selectedMovie} />
+        )}
+      </div>
     </div>
   );
 }
