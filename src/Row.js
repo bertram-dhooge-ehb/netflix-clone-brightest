@@ -20,6 +20,7 @@ function Row({ title, fetchUrl }) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -41,7 +42,13 @@ function Row({ title, fetchUrl }) {
         }
       })
       .catch((error) => console.log(error));
-      setSelectedMovie(movie);
+      if(movie === selectedMovie){
+        setShow(!show);
+      } else {
+        setShow(true);
+        setSelectedMovie(movie);
+      }
+      
   };
 
   return (
@@ -60,7 +67,7 @@ function Row({ title, fetchUrl }) {
       </div>
       <div className="details">
         {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
-        {selectedMovie && <Detail movie={selectedMovie}/>}
+        {show && <Detail movie={selectedMovie}/>}
       </div>
     </div>
   );
