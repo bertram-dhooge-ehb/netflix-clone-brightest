@@ -1,6 +1,6 @@
 import React from "react";
 import YouTube from "react-youtube";
-import "./Details.css";
+import "./Detail.css";
 
 const opts = {
   height: "390",
@@ -25,27 +25,10 @@ function Detail({ movieId }) {
       ></YouTube>
       {/* de details zelf*/}
       <div className="details">
-        <div id="year" className="little">
-          {" "}
-          {/* year */} 2001{" "}
-        </div>
-        <div id="runtime" className="little">
-          {" "}
-          {/*runtime*/} 152 min{" "}
-        </div>
-        <div id="title" className="big">
-          {" "}
-          {/*Title */} Harry Potter and the pilospher's stone
-        </div>
-        <div id="plot" className="big">
-          {/* plot */}Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-          ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </div>
+        <div id="year" className="little"> {this.props.movie.release_date.slice(0,4)} </div>
+        <div id="runtime" className="little"> {/*runtime*/}  </div>
+        <div id="title" className="big"> {this.props.movie.title} Harry Potter and the pilospher's stone</div>
+        <div id="plot" className="big">{this.props.movie.overview}</div>
       </div>
       <button className="back">Go back</button>
     </div>
