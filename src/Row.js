@@ -19,7 +19,8 @@ const opts = {
 function Row({ title, fetchUrl }) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
-  const [selectedMovie, setSelectedMovie] = useState({});
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [selected, setSelected] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -31,7 +32,6 @@ function Row({ title, fetchUrl }) {
   }, [fetchUrl]);
 
   const handleClick = (movie) => {
-    
     movieTrailer((movie?.name ? movie.name : movie.title) || "")
       .then((url) => {
         const urlParams = new URLSearchParams(new URL(url).search);
@@ -42,8 +42,8 @@ function Row({ title, fetchUrl }) {
         }
       })
       .catch((error) => console.log(error));
+      setSelected(!selected);
       setSelectedMovie(movie);
-      console.log(selectedMovie);
   };
 
   return (
@@ -60,8 +60,10 @@ function Row({ title, fetchUrl }) {
           />
         ))}
       </div>
-      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
-      {/* {{selectedMovie && <Detail movie={selectedMovie}/>}} */}
+      <div className="details">
+        {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
+        {selected && <Detail movie={selectedMovie}/>}
+      </div>
     </div>
   );
 }
