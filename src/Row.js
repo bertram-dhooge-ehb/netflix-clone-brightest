@@ -41,6 +41,7 @@ function Row({ title, fetchUrl }) {
         }
       })
       .catch((error) => console.log(error));
+      setSelectedMovie(movie);
   };
 
   return (
