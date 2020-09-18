@@ -59,7 +59,7 @@ function Row({ title, fetchUrl }) {
       </div>
       <div className="details">
         {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
-        {selected && <Detail movie={selectedMovie}/>}
+        {selectedMovie && <Detail movie={selectedMovie}/>}
       </div>
     </div>
   );
