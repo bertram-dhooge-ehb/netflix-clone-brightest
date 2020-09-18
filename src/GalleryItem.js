@@ -39,7 +39,9 @@ function GalleryItem({ movieId }) {
         marginRight: "auto",
       }}
     >
-      <h1>{movie?.title || movie?.name || movie?.original_name}</h1>
+      <h1 style={{ opacity: ".5" }}>
+        {movie?.title || movie?.name || movie?.original_name}
+      </h1>
       {/*<img
         key={movieId}
         className="row_poster"
