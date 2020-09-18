@@ -39,7 +39,7 @@ function GalleryItem({ movieId }) {
         marginRight: "auto",
       }}
     >
-      <h1 style={{ opacity: ".5" }}>
+      <h1 style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
         {movie?.title || movie?.name || movie?.original_name}
       </h1>
       {/*<img

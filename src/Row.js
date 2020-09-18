@@ -31,7 +31,6 @@ function Row({ title, fetchUrl }) {
   }, [fetchUrl]);
 
   const handleClick = (movie) => {
-    
     movieTrailer((movie?.name ? movie.name : movie.title) || "")
       .then((url) => {
         const urlParams = new URLSearchParams(new URL(url).search);
@@ -42,8 +41,12 @@ function Row({ title, fetchUrl }) {
         }
       })
       .catch((error) => console.log(error));
+    if (selectedMovie === movie) {
+      setSelectedMovie("");
+    } else {
       setSelectedMovie(movie);
-      console.log(selectedMovie);
+    }
+    console.log(selectedMovie);
   };
 
   return (
