@@ -45,12 +45,6 @@ function GalleryItem({ movieId }) {
         {movie?.title || movie?.name || movie?.original_name}
       </h1>
       {show && <Detail trailerUrl={null} movie={movie}></Detail>}
-      {/*<img
-        key={movieId}
-        className="row_poster"
-        src={`${base_url}${movie.poster_path}`}
-        alt={movie.name}
-      />*/}
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Detail.css";
 import YouTube from "react-youtube";
-import movieTrailer from "movie-trailer";
 
 const opts = {
   height: "390",
